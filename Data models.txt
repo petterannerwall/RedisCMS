@@ -1,0 +1,7 @@
+
+
+Hash users 	username -> id
+
+hash user:id	username -> # 
+		password -> # 
+		auth -> #

@@ -1,0 +1,84 @@
+<div class="row" ng-controller="requestsController as ctrl">
+    <div class="col s12 ">
+        <div class="btn-flat" style="cursor: default; padding: 2px;">ACCOUNT: {{ctrl.user.account | capitalize}}</div>
+        <div class="btn-flat" style="cursor: default; padding: 2px;">USER: {{ctrl.user.username | capitalize}}</div>
+        <a href="#!" class=" right red-text btn-flat" style="padding: 2px;" ng-click="ctrl.logout()">Logout</a>
+    </div>
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Requests                    
+                <div class="right">
+                    <a href="#new_request_modal" class="modal-trigger waves-effect waves-light btn" ng-click="ctrl.newRequest()">new</a>
+                    </div>
+                </span>
+                <table class="highlight bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>User</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="req in ctrl.requests">
+                            <td>{{req.id}}</td>
+                            <td><a href="#edit_request_modal" class="modal-trigger" ng-click="ctrl.editRequest(req)">{{req.title}}</a></td>
+                            <td>{{req.user.username | capitalize}}</td>
+                            <td><i class="material-icons red-text" ng-click="ctrl.deleteRequest(req.id)">delete</i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <ul class="pagination center">
+            <li ng-click="ctrl.previousPage()"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li ng-repeat="page in ctrl.pages" ng-class="{active: page == ctrl.page}" class="waves-effect" ng-click="ctrl.changePage(page)"><a href="#!">{{page+1}}</a></li>
+            <li class="waves-effect" ng-click="ctrl.nextPage()"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+    </div>
+
+    <div id="new_request_modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Create request</h4>
+            <form>
+                <div class="input-field ">
+                    <input id="title" type="text" class="validate" ng-model="ctrl.newTitle">
+                    <label for="title">Title</label>
+                </div>
+                <form>
+                    <div class="input-field">
+                        <textarea id="description" class="materialize-textarea" ng-model="ctrl.newDescription"></textarea>
+                        <label for="description">Description</label>
+                    </div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-light btn" ng-click="ctrl.createNew()">Create</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-red red-text btn-flat ">Close</a>
+        </div>
+    </div>
+    <div id="edit_request_modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Edit request</h4>
+            <form>
+                <div class="input-field ">
+                    <input id="title" type="text" class="validate" ng-model="ctrl.currentEdit.title">
+                    <label for="title" class="active">Title</label>
+                </div>
+                <form>
+                    <div class="input-field">
+                        <textarea id="edit_description" class="materialize-textarea" ng-model="ctrl.currentEdit.description"></textarea>
+                        <label for="description" clasS="active">Description</label>
+                    </div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-light btn" ng-click="ctrl.updateRequest()">Save</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-red red-text btn-flat ">Close</a>
+        </div>
+    </div>
+</div>

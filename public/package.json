@@ -1,0 +1,12 @@
+{
+    "name": "anuglar-app",
+    "main": "app.js",
+    "dependencies": {
+      "angular": "*",
+      "angular-ui-router": "*",
+      "angular-local-storage": "*",
+      "jquery": "*",
+      "materialize-css": "*",
+      "angular-socket-io": "*"
+    }
+}
