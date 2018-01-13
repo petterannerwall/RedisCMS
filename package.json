@@ -1,12 +1,18 @@
 {
-    "name": "node-api",
-    "main": "server.js",
-    "dependencies": {
-      "express": "~4.0.0",
-      "body-parser": "~1.0.1",
-      "redis": "2.7.1",
-      "express-handlebars" : "3.0.0",
-      "async": "*",
-      "socket.io": "*"
-    }
+  "name": "node-api",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.0.0",
+    "body-parser": "~1.0.1",
+    "redis": "2.7.1",
+    "express-handlebars": "3.0.0",
+    "async": "*",
+    "socket.io": "*",
+    "angular": "*",
+    "@uirouter/angularjs": "*",
+    "angular-local-storage": "*",
+    "jquery": "*",
+    "materialize-css": "*",
+    "angular-socket-io": "*"
+  }
 }

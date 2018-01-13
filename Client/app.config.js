@@ -5,7 +5,7 @@
         localStorageServiceProvider.setPrefix('rr_');
         $locationProvider.html5Mode({
             enabled: true,
-            requireBase: false
+            requireBase: true,
         });
 
     });
