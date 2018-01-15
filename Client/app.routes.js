@@ -5,16 +5,26 @@
 
         var requestsState = {
             name: 'requests',
-            url: '/',
+            url: '/requests',
             views: {
                 content: {
                     templateUrl: '/states/requests.html'
                 }
             }
         }
+        var singleRequestsState = {
+            name: 'singleRequest',
+            url: '/requests/:requestId',
+            views: {
+                content: {
+                    // templateUrl: '/states/requests.html'
+                    template: '<h1>Single request state</h1>'
+                }
+            }
+        }
         var loginState = {
             name: 'login',
-            url: '/login',
+            url: '/',
             views: {
                 content: {
                     templateUrl: '/states/login.html'

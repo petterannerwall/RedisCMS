@@ -63,21 +63,9 @@ function CreateUser(username, password, account, callback) {
     if (username && password) {
         username = username.toLowerCase();
         password = password.toLowerCase();
-        client.get("next_user_id", function (err, next_user_id) {
-            if (next_user_id == null) {
-                client.set("next_user_id", 1);
-                next_user_id = 1;
-            }
-            client.incr("next_user_id");
-            client.hmget("users", username, function (err, userId) {
-                if (userId[0] == null) {
-                    client.hmset("users", username, next_user_id);
-                    client.hmset("user:" + next_user_id, "id", next_user_id, "username", username, "password", password, "account", account);
-                    callback({ success: true, message: "User registered!" });
-                }
-                else {
-                    callback({ success: false, message: "Username already taken, <br> please try something else" })
-                }
+        userRepository.getNextUserId(function (next_user_id) {
+            userRepository.createUser(next_user_id, username, password, account, function (result) {
+                callback(result);
             })
         });
     }
