@@ -1,16 +1,14 @@
 var path = require('path')
 var express = require('express');
-var bodyParser = require('body-parser');
-var redis = require("redis");
-
+var exphbs = require('express-handlebars');
+var helpers = require('./server-helpers');
 var app = express();
-var client = redis.createClient();
-var router = express.Router();
 
-var helpers = require('./helpers');
-var userController = require('./controllers/userController');
-var authController = require('./controllers/authController');
-var requestController = require('./controllers/requestController');
+
+var bodyParser = require('body-parser');
+
+var redis = require("redis");
+var client = redis.createClient();
 
 client.on("error", function (err) {
     console.log("Error " + err);
@@ -21,15 +19,21 @@ app.use(express.static(path.resolve('./../client')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 var port = process.env.PORT || 8787;
 
 var requestKey = "request-";
 var userKey = "user-";
 var requestMetaKey = "request-meta-";
+var router = express.Router();
 
 var secureRoutes = [
     'request',
-];
+]
+
+var userController = require('./controllers/user');
+var authController = require('./controllers/auth');
+var requestController = require('./controllers/request');
 
 router.use(function (req, res, next) {
 
@@ -55,6 +59,7 @@ router.use(function (req, res, next) {
 });
 
 
+
 // SETUP ROUTES
 // =============================================================================
 
@@ -73,6 +78,7 @@ router.get('/api/account/new', function (req, res) {
         }
     });
 });
+
 
 // USER ROUTES
 // =============================================================================
@@ -167,6 +173,7 @@ router.get('/api/request/user/:userId', function (req, res) {
     })
 });
 
+
 // MISC ROUTES
 // =============================================================================
 
@@ -174,7 +181,11 @@ router.post('/api/status', function (req, res) {
 
     var auth = req.headers.auth;
     var statusArray = req.body.statuses;
+
+
+
     var statusArray = JSON.parse(statusArray);
+
 
     res.json({
         success: true,

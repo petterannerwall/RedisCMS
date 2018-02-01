@@ -1,7 +1,5 @@
-var userRepository = require('./../repositories/userRepository');
-var helpers = require('./../helpers');
 var redis = require("redis");
-
+var helpers = require('./../server-helpers');
 var client = redis.createClient();
 
 module.exports = {
