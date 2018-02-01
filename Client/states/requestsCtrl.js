@@ -19,13 +19,16 @@
         activate();
 
         function activate() {
-            var auth = localStorageService.get('auth');
+            console.log('requestsController initialized');
 
-            $http.get('/api/request?page=' + vm.page).then(function (response) {
+            var auth = localStorageService.get('auth');
+            
+
+            $http.get('/api/request?page='+vm.page).then(function (response) {
 
                 console.log(response.data);
                 vm.requests = response.data ? response.data.requests : [];
-                if (vm.requests != []) {
+                if(vm.requests != []){
                     vm.totalpages = response.data.totalPages;
                     vm.pages = response.data.pages;
                     vm.page = response.data.page;
@@ -37,7 +40,7 @@
                     console.log(response);
                 });
 
-            $http.get('/api/user/' + auth).then(function (response) {
+                $http.get('/api/user/'+auth).then(function (response) {
 
                 vm.user = response.data.user;
 
@@ -49,19 +52,19 @@
 
         }
 
-        vm.changePage = function (page) {
+        vm.changePage = function(page){
             vm.page = page;
             activate();
         }
 
-        vm.nextPage = function () {
-            if (vm.page + 1 < vm.totalpages)
+        vm.nextPage = function(){
+            if(vm.page+1 < vm.totalpages)
                 vm.page++;
             activate();
         }
 
-        vm.previousPage = function () {
-            if (vm.page - 1 != -1)
+        vm.previousPage = function(){
+            if(vm.page-1 != -1)
                 vm.page--;
             activate();
         }
@@ -84,7 +87,7 @@
 
         vm.updateRequest = function () {
 
-            $http.post('/api/request/' + vm.currentEdit.id, vm.currentEdit).then(function (response) {
+            $http.post('/api/request/'+vm.currentEdit.id, vm.currentEdit).then(function (response) {
                 activate();
             },
                 function (response) {

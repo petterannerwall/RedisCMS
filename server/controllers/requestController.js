@@ -88,7 +88,7 @@ function Create(auth, title, description, callback) {
     }
 }
 
-function GetAll(auth, page, callback) {
+function GetAll(auth, page) {
     client.hget("auths", auth, function (err, userId) {
         client.hget("user:" + userId, "account", function (err, account) {
 

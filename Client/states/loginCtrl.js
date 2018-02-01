@@ -20,6 +20,7 @@
         vm.registerUsername = '';
         vm.registerPassword = '';
 
+
         activate();
 
         function activate() {
@@ -54,6 +55,8 @@
                     vm.registerPassword = '';
                     vm.switchToLogin();
                 }
+
+
             },
                 function (response) {
                     console.log('Something went wrong with Login');
@@ -87,6 +90,8 @@
             else {
                 vm.error = "Username or password missing.";
             }
+
         }
+
     }
 })();

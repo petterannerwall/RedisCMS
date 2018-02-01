@@ -9,6 +9,7 @@
                 var authData = localStorageService.get('auth');
                 if (authData) {
                     config.headers.auth = authData;
+                    console.log('Adding auth key');
                 }
 
                 return config;
@@ -23,7 +24,7 @@
                 // do something on success
                 return response;
             },
-
+            
             // optional method
             'response': function (response) {
                 if (response.status === 401) {
