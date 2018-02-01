@@ -1,4 +1,3 @@
-var path = require('path')
 var express = require('express');
 var exphbs = require('express-handlebars');
 var helpers = require('./server-helpers');
@@ -14,8 +13,7 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-app.use('/scripts', express.static(path.resolve('./../node_modules/')));
-app.use(express.static(path.resolve('./../client')));
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -55,6 +53,7 @@ router.use(function (req, res, next) {
     else {
         next();
     }
+
 });
 
 
@@ -565,7 +564,7 @@ router.post('/api/status', function (req, res) {
 // =============================================================================
 
 router.get('*', function (req, res) {
-    res.sendfile(path.resolve('.(/../../client/index.html'));
+    res.sendfile('./public/index.html');
 });
 
 // =============================================================================
